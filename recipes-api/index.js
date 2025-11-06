@@ -48,17 +48,21 @@ async function getOneRecipe(index) {
 
 // 3. getAllRecipeNames()
 async function getAllRecipeNames() {
+  // declared variables
   const data = await fs.readFile("./recipes-data.json", "utf8");
   const parsedRecipes = JSON.parse(data);
 
+  // loop through parsed recipes and return each recipe name
   return parsedRecipes.map((recipe) => recipe.name);
 }
 
 // 4. getRecipesCount()
 async function getRecipesCount() {
+  // declared variables
   const data = await fs.readFile("./recipes-data.json", "utf8");
   const parsedRecipes = JSON.parse(data);
 
+  // return the length of parsed recipes - this will get the # of recipes
   return parsedRecipes.length;
 }
 
@@ -68,8 +72,10 @@ async function getRecipesCount() {
 
 // 1. GET /get-all-recipes
 app.get("/get-all-recipes", async (req, res) => {
+  // call the helper function
   const recipes = await getAllRecipes();
 
+  // send recipes as json data
   res.json(recipes);
 });
 
@@ -86,14 +92,18 @@ app.get("/get-one-recipe/:index", async (req, res) => {
 
 // 3. GET /get-all-recipe-names
 app.get("/get-all-recipe-names", async (req, res) => {
+  // call the helper function
   const recipeNames = await getAllRecipeNames();
 
+  // send the recipe as json data
   res.json(recipeNames);
 });
 
 // 4. GET /get-recipes-count
 app.get("/get-recipes-count", async (req, res) => {
+  // call the helper function
   const recipeCount = await getRecipesCount();
 
+  // send the recipe as json data
   res.json(recipeCount);
 });
