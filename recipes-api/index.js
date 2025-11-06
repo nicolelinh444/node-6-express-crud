@@ -29,9 +29,12 @@ app.listen(port, () => {
 
 // 1. getAllRecipes()
 async function getAllRecipes() {
+  // declared variables
   const data = await fs.readFile("./recipes-data.json", "utf8");
+  // parse recipe data
   const parsedRecipes = JSON.parse(data);
 
+  // return parsed recipe data
   return parsedRecipes;
 }
 
