@@ -37,27 +37,29 @@ async function getAllRecipes() {
 
 // 2. getOneRecipe(index)
 async function getOneRecipe(index) {
+  // read the recipes data from the data.json file
+  // declared variables
   const data = await fs.readFile("./recipes-data.json", "utf8");
   const parsedRecipes = JSON.parse(data);
 
+  // return the parsed data at the index number
   return parsedRecipes[index];
 }
 
-
 // 3. getAllRecipeNames()
 async function getAllRecipeNames() {
-    const data = await fs.readFile("./recipes-data.json", "utf8");
-    const parsedRecipes = JSON.parse(data);
+  const data = await fs.readFile("./recipes-data.json", "utf8");
+  const parsedRecipes = JSON.parse(data);
 
-    return parsedRecipes.map(recipe => recipe.name);
+  return parsedRecipes.map((recipe) => recipe.name);
 }
 
 // 4. getRecipesCount()
 async function getRecipesCount() {
-    const data = await fs.readFile("./recipes-data.json", "utf8");
-    const parsedRecipes = JSON.parse(data);
+  const data = await fs.readFile("./recipes-data.json", "utf8");
+  const parsedRecipes = JSON.parse(data);
 
-    return parsedRecipes.length;
+  return parsedRecipes.length;
 }
 
 // ---------------------------------
@@ -66,29 +68,32 @@ async function getRecipesCount() {
 
 // 1. GET /get-all-recipes
 app.get("/get-all-recipes", async (req, res) => {
-    const recipes = await getAllRecipes();
+  const recipes = await getAllRecipes();
 
-    res.json(recipes);
-  });
+  res.json(recipes);
+});
 
 // 2. GET /get-one-recipe/:index
 app.get("/get-one-recipe/:index", async (req, res) => {
-    const index = req.params.index;
-    const recipe = await getOneRecipe(index);
+  // declared variables
+  const index = req.params.index;
+  // call the helper function
+  const recipe = await getOneRecipe(index);
 
-    res.json(recipe);
-  });
+  // send the recipe as json data
+  res.json(recipe);
+});
 
 // 3. GET /get-all-recipe-names
 app.get("/get-all-recipe-names", async (req, res) => {
-    const recipeNames = await getAllRecipeNames();
+  const recipeNames = await getAllRecipeNames();
 
-    res.json(recipeNames);
+  res.json(recipeNames);
 });
 
 // 4. GET /get-recipes-count
 app.get("/get-recipes-count", async (req, res) => {
-    const recipeCount = await getRecipesCount();
+  const recipeCount = await getRecipesCount();
 
-    res.json(recipeCount);
-})
+  res.json(recipeCount);
+});
